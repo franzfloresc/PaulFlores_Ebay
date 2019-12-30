@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\paul.flores\Desktop\WK-JAVA\.metadata\.plugins\org.eclipse.jdt.core
+2393563997.index

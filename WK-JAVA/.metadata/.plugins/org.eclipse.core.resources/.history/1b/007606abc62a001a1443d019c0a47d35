@@ -1,0 +1,41 @@
+package prueba;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class EbaySearch {
+	
+	public WebDriver driver;
+	By resultadoLocator = By.xp
+	
+	@Before
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver2/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.ebay.com/");
+		Thread.sleep(2000);
+	}
+	
+	@Test
+	public void testEbayPage() {
+		WebElement searchbox = driver.findElement(By.name("_nkw"));
+		searchbox.clear();
+		searchbox.sendKeys("Zapatos");
+		searchbox.submit();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+	
+	@After
+	public void tearDown() {
+		driver.quit();
+
+	}
+}

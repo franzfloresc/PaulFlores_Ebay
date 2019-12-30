@@ -1,0 +1,16 @@
+package prueba;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+public class EbaySearch {
+	
+	private WebDriver driver;
+	
+	@Before
+	private void setUp() {
+		System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver/chromedriver.exe")
+	}
+	
+	
+
+}

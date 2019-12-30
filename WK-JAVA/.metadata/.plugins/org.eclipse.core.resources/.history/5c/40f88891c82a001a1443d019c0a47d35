@@ -1,0 +1,58 @@
+package prueba;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class EbaySearch {
+	
+	public WebDriver driver;
+	By resultadoLocator = By.linkText("Guardar esta búsqueda");
+	By buscadormarcaLocator= By.id("w4-w12-0[0]");
+	By marcaPumaLocator = By.xpath("//input[@type='checkbox' and (contains(@aria-label, 'PUMA'))]");
+	
+	@Before
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver2/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.ebay.com/");
+	}
+	
+	@Test
+	public void testEbayPage() {
+		WebElement searchbox = driver.findElement(By.name("_nkw"));
+		searchbox.clear();
+		searchbox.sendKeys("Zapatos");
+		searchbox.submit();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		if(driver.findElement(resultadoLocator).isDisplayed()) {
+			if(driver.findElement(buscadormarcaLocator).isDisplayed()) {
+				WebElement searchboxMarca = driver.findElement(By.id("w4-w12-0[0]"));
+				searchboxMarca.clear();
+				searchboxMarca.sendKeys("PUMA");
+				if(driver.findElement(marcaPumaLocator).isDisplayed()) {
+					WebElement checkboxMarca = driver.findElement(marcaPumaLocator);
+					checkboxMarca.click();
+
+					driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+					
+				}
+				
+				}
+			}
+	}
+	
+	@After
+	public void tearDown() {
+		driver.quit();
+
+	}
+}

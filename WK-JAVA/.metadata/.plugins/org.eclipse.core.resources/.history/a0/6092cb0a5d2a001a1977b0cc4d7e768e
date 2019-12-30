@@ -1,0 +1,27 @@
+package prueba;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+public class EbaySearch {
+	
+	private WebDriver driver;
+	
+	@Before
+	private void setUp() {
+		System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.ebay.com/");
+	}
+	
+	@Test
+	private void testEbayPage() {
+		WebElement searchbox = driver.findElement(By.name(""));
+		searchbox.clear();
+		searchbox.sendKeys("Zapatos");
+		searchbox.submit();
+	}
+	
+	
+
+}
